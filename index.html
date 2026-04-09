@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人简历 - HRBP / OD 求职</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-light: #e8f0fe;
+      --accent: #0ea5e9;
+      --text: #1e293b;
+      --text-light: #475569;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --tag-bg: #dbeafe;
+      --tag-text: #1e40af;
+      --success: #059669;
+      --success-bg: #d1fae5;
+      --highlight: #fef3c7;
+      --highlight-text: #92400e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* ===== TOP BANNER ===== */
+    .hero {
+      background: linear-gradient(135deg, #1a56db 0%, #0ea5e9 100%);
+      color: white;
+      padding: 48px 0 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 10%;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .container { width: 100%; max-width: none; margin: 0 auto; padding: 0 48px; }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .avatar-wrap {
+      flex-shrink: 0;
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px;
+      border: 3px solid rgba(255,255,255,0.5);
+      letter-spacing: 0;
+    }
+
+    .hero-info h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .hero-tagline {
+      font-size: 15px;
+      opacity: 0.9;
+      margin-bottom: 14px;
+      font-weight: 400;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .hero-meta span {
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 3px 12px;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    /* ===== AI HIGHLIGHT BAR ===== */
+    .ai-bar {
+      background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+      color: white;
+      padding: 14px 0;
+    }
+    .ai-bar-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ai-badge {
+      background: linear-gradient(90deg, #6366f1, #0ea5e9);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .ai-bar p {
+      font-size: 13px;
+      opacity: 0.85;
+      flex: 1;
+    }
+
+    /* ===== CORE VALUE CARDS ===== */
+    .section { padding: 28px 0; }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 18px;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover { box-shadow: 0 6px 24px rgba(26,86,219,0.1); transform: translateY(-2px); }
+    .card-icon { font-size: 26px; margin-bottom: 10px; }
+    .card-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+    .card-desc { font-size: 12.5px; color: var(--text-light); line-height: 1.65; }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px; top: 6px; bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -20px; top: 5px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .tl-head {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .tl-company {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .tl-role {
+      font-size: 13px;
+      color: var(--white);
+      background: var(--primary);
+      border-radius: 4px;
+      padding: 1px 8px;
+    }
+    .tl-date {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-left: auto;
+    }
+    .tl-sub {
+      font-size: 12.5px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    /* Achievement blocks */
+    .ach-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .ach-item {
+      background: var(--bg);
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .ach-item strong { color: var(--primary); }
+
+    /* Result pills */
+    .result-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .result-pill {
+      background: var(--success-bg);
+      color: var(--success);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    /* OD Project cards */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .proj-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .proj-card:hover { box-shadow: 0 4px 16px rgba(26,86,219,0.08); }
+    .proj-tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .proj-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .proj-desc {
+      font-size: 12.5px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .proj-highlight {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--highlight-text);
+      background: var(--highlight);
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+
+    /* AI Tools section */
+    .ai-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .ai-tool-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .ai-tool-card:hover { box-shadow: 0 4px 16px rgba(14,165,233,0.1); }
+    .ai-tool-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #0ea5e9);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .ai-tool-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .ai-tool-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+
+    /* Education */
+    .edu-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .edu-logo {
+      width: 52px; height: 52px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .edu-main h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .edu-sub { font-size: 13px; color: var(--text-light); margin-bottom: 10px; }
+    .edu-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .edu-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* Skills */
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .skill-tag {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      color: var(--text);
+      font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--primary); color: var(--primary); }
+    .skill-tag.hot { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+    /* Divider */
+    .divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+    /* Footer */
+    .footer {
+      background: #1e293b;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .project-grid { grid-template-columns: 1fr; }
+      .ai-tools-grid { grid-template-columns: 1fr; }
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-meta { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="avatar-wrap" onclick="openModal()"><img src="photo.jpg" alt="头像" style="width:100%;height:100%;object-fit:cover;border-radius:50%;cursor:pointer;"></div>
+      <div class="hero-info">
+        <h1>张梦伦</h1>
+        <p class="hero-tagline">期望岗位：HRBP / OD | 腾讯在职 · 3年 HR经验</p>
+        <div class="hero-meta">
+          <span>🎓 大连理工大学</span>
+          <span>🏢 腾讯 TEG</span>
+          <span>📅 2026年5月中旬可入职</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ===== MAIN ===== -->
+<div class="container">
+
+  <!-- 核心能力 -->
+  <div class="section">
+    <div class="section-title">⚡ 核心能力与竞争优势</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🏗️</div>
+        <div class="card-label">组织发展（OD）</div>
+        <div class="card-desc">主导/参与新人培养体系从0到1搭建、人才梯队盘点（九宫格）、组织架构重组融合、年轻人成长路径规划</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-label">HRBP 业务支撑</div>
+        <div class="card-desc">独立承接人力月报、大评估全流程、产品人力盘点、组织测温与敬满报告，精准输出 HR 解决方案</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-label">AI 赋能 HR</div>
+        <div class="card-desc">将 AI 工具深度融入方案设计、数据分析、内容生产，效率大幅提升，是团队内 AI 应用探索的推动者</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎓</div>
+        <div class="card-label">培训体系设计</div>
+        <div class="card-desc">从需求访谈→课程设计→落地运营→复盘优化，全链路构建 ABP、毕业生等群体个性化培养方案</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <div class="card-label">跨部门资源整合</div>
+        <div class="card-desc">拉通 BG、基础设施线、外部供应商等多方资源，协调推进跨组织项目落地，具备强项目 PM 能力</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌱</div>
+        <div class="card-label">招聘全链路</div>
+        <div class="card-desc">在百度独立完成 20+ 岗位研发/产品社招及实习生招聘，高峰 60HC，入职 1 个月完成 10 个岗位闭环</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 工作经历 -->
+  <div class="section">
+    <div class="section-title">💼 工作经历</div>
+    <div class="timeline">
+
+      <!-- 腾讯 -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <span class="tl-company">腾讯 Tencent · TEG</span>
+          <span class="tl-role">助理 HRBP</span>
+          <span class="tl-date">2023.08 — 至今</span>
+        </div>
+        <div class="tl-sub">技术工程事业群 · 基础设施 · 深圳</div>
+
+        <!-- OD 项目 -->
+        <div class="section-title" style="font-size:13px; margin-bottom:12px; margin-top:4px;">🔷 组织发展与人才培养</div>
+        <div class="project-grid" style="margin-bottom:16px;">
+
+          <div class="proj-card">
+            <span class="proj-tag">毕业生培养</span>
+            <div class="proj-title">基础设施线毕业生联合培养体系</div>
+            <div class="proj-desc">联合网平、I 平、运管、研管四个部门，从0到1构建跨部门毕业生集体培养方案；整合实地学习、理论课程、mini项目实践、GM 面对面等模块，1个月内完成55名毕业生全流程培养落地。</div>
+            <div class="proj-highlight">🔑 个性化实地课程设计（硬件机房参观/风火水电园区），刷新标准培养方案</div>
+          </div>
+
+          <div class="proj-card">
+            <span class="proj-tag">年轻人发展</span>
+            <div class="proj-title">优秀年轻人识别与加速成长项目</div>
+            <div class="proj-desc">启动部门重点年轻人盘点（绩效-潜力九宫格），梳理适合年轻人发展的 leader/岗位方向；拉通总监开展"总监×实习生面对面"活动，实现保温降约；推动导师参与代际沟通课程，缩短与新生代磨合期。</div>
+            <div class="proj-highlight">🔑 首次启动全员九宫格盘点 + 重点年轻人年终盘点</div>
+          </div>
+
+          <div class="proj-card">
+            <span class="proj-tag">ABP 能力建设</span>
+            <div class="proj-title">ABP 专业能力培养课程体系（0→1）</div>
+            <div class="proj-desc">访谈 BP 及 6 位 ABP，精准定位能力 gap；以"HR 解决问题能力流程"为框架，搭建理论赋能+场景实践分享双轨课程；邀请晋升 HR 专场分享，拓宽 ABP 对 OD/招聘等领域的视野。</div>
+            <div class="proj-highlight">🔑 从访谈洞察到方案落地全链路独立负责</div>
+          </div>
+
+          <div class="proj-card">
+            <span class="proj-tag">组织架构</span>
+            <div class="proj-title">广工部门组织重组与团队融合支持</div>
+            <div class="proj-desc">协助 BP 支持广工两次大团队融合及组织架构重组；落地"大仓悬赏"专项方案刷新、职级评审方案优化、年度员工调研方案制定与落地等一系列个性化 HR 工作。</div>
+            <div class="proj-highlight">🔑 全流程独立主导，保障组织重组期平稳落地</div>
+          </div>
+
+        </div>
+
+        <!-- HRBP 运营 -->
+        <div class="section-title" style="font-size:13px; margin-bottom:12px;">🔷 HRBP 运营与数据支撑</div>
+        <ul class="ach-list">
+          <li class="ach-item">📋 <strong>人力数据体系：</strong>每月输出正式/子公司/外包员工人力月报（全年12份），by 季度完成产品人力盘点表（36份/年），建立动态 HC 投入监控机制，帮助 GM 实时看清人力大盘</li>
+          <li class="ach-item">🎯 <strong>大评估全流程：</strong>独立制作部门盘点报表 15+，负责绩效/梯队/晋级数据准确性与系统上传；沉淀大评估全流程 SOP，持续优化流程效率</li>
+          <li class="ach-item">💡 <strong>组织测温洞察：</strong>拆分输出中心/小组敬满报告 20+份，与管理干部 1v1 沟通问题归因，制定组织解决方案，为架构调整提供数据输入</li>
+          <li class="ach-item">📚 <strong>文化与培训运营：</strong>统筹全年"i学堂"课程12场（300+参与人次）、"走进"栏目文章近70篇（撰稿人近100人），全链路从规划→组织→复盘→优化</li>
+          <li class="ach-item">🏃 <strong>奔跑鹅专项项目（PM角色）：</strong>协调 BG、基础设施线、外部供应商三方资源，统筹设计方案制定与项目整体推进，如期完成落地</li>
+        </ul>
+        <div class="result-row">
+          <span class="result-pill">✅ 全年12场培训运营闭环</span>
+          <span class="result-pill">✅ 近70篇内容产出</span>
+          <span class="result-pill">✅ 36份季度人力盘点</span>
+          <span class="result-pill">✅ 20+ 组织测温报告</span>
+          <span class="result-pill">✅ 0→1 ABP 培养体系</span>
+          <span class="result-pill">✅ 55人毕业生联合培养</span>
+        </div>
+      </div>
+
+      <!-- 百度 -->
+      <div class="tl-item" style="margin-top:28px;">
+        <div class="tl-dot" style="background:#e66c37;box-shadow:0 0 0 2px #e66c37;"></div>
+        <div class="tl-head">
+          <span class="tl-company">百度 Baidu</span>
+          <span class="tl-role" style="background:#e66c37;">招聘实习生</span>
+          <span class="tl-date">2022.06 — 2022.09</span>
+        </div>
+        <div class="tl-sub">研发/产品类社招及实习生招聘 · 北京</div>
+        <ul class="ach-list">
+          <li class="ach-item">负责 <strong>20+ 岗位</strong>的研发与产品类社招及实习生招聘（高峰期达 <strong>60 HC</strong>）</li>
+          <li class="ach-item">入职<strong>第一个月</strong>即完成 10 个岗位招聘闭环，快速上手并独立推进全链路</li>
+          <li class="ach-item">实习期内实现正式员工入职 <strong>13 人</strong>、实习生入职 <strong>9 人</strong></li>
+          <li class="ach-item">持续优化招聘全链路，参与改善面试流程效率，获业务侧认可</li>
+        </ul>
+        <div class="result-row">
+          <span class="result-pill">✅ 正式员工入职13人</span>
+          <span class="result-pill">✅ 实习生入职9人</span>
+          <span class="result-pill">✅ 1个月完成10岗位闭环</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 教育背景 -->
+  <div class="section">
+    <div class="section-title">🎓 教育背景</div>
+    <div class="edu-card">
+      <div class="edu-logo">🏛️</div>
+      <div class="edu-main">
+        <h3>大连理工大学 <span style="font-size:12px;font-weight:500;color:var(--primary);background:var(--primary-light);padding:2px 8px;border-radius:4px;margin-left:6px;">985</span><span style="font-size:12px;font-weight:500;color:var(--primary);background:var(--primary-light);padding:2px 8px;border-radius:4px;margin-left:6px;">211</span><span style="font-size:12px;font-weight:500;color:var(--primary);background:var(--primary-light);padding:2px 8px;border-radius:4px;margin-left:6px;">双一流A类</span></h3>
+        <div class="edu-sub">本科 · 2019.09 — 2023.06 | GPA：3.6 / 5.0 · 专业排名 Top 20%</div>
+        <div class="edu-tags">
+          <span class="edu-tag">🏅 大连理工大学优秀团干部</span>
+          <span class="edu-tag">🌟 学院团委副书记</span>
+          <span class="edu-tag">📈 专业排名 Top 20%</span>
+          <span class="edu-tag">🎓 GPA 3.6/5.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自我评价 -->
+  <div class="section">
+    <div class="section-title">💬 个人价值主张</div>
+    <div style="background:var(--white); border:1px solid var(--border); border-radius:12px; padding:22px 24px;">
+      <p style="font-size:13.5px; color:var(--text); line-height:1.9;">
+        我是一名<strong>以业务视角驱动 HR 价值</strong>的从业者。在腾讯 TEG 的3年实践中，我深入基础设施业务一线，独立承接从<strong>组织数据分析、人才盘点、培养体系搭建到组织测温与解决方案落地</strong>的全链路工作，积累了扎实的 HRBP 与 OD 实战经验。
+      </p>
+      <p style="font-size:13.5px; color:var(--text); line-height:1.9; margin-top:12px;">
+        我渴望在 HRBP / OD 岗位上持续深耕，<strong>用数据说话、用方案落地、用 AI 提效</strong>，成为真正能影响业务、推动组织持续健康发展的 HR 合伙人。
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- 图片放大模态框 -->
+<div id="imgModal" style="display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;cursor:pointer;" onclick="closeModal()">
+  <img src="photo.jpg" style="max-width:90%;max-height:90%;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('imgModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('imgModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>本简历由 AI 辅助生成 · 仅供招聘用途</p>
+</div>
+
+</body>
+</html>
